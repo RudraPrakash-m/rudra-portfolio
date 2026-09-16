@@ -72,9 +72,6 @@ export const BackgroundVideos = forwardRef(({ isMuted, activeIndex }, ref) => {
                 className="absolute inset-0 w-full h-full object-cover object-[15%_center] sm:object-left lg:object-center select-none transform-gpu will-change-transform"
               />
             )}
-
-            {/* Mobile Top Scrim for crisp text contrast */}
-            <div className="lg:hidden absolute inset-0 bg-gradient-to-b from-[#f5f5f5]/80 via-[#f5f5f5]/30 to-transparent pointer-events-none h-[40vh]" />
           </div>
         );
       })}

@@ -26,7 +26,7 @@ export const HeaderNav = ({ isMuted, setIsMuted, onNavigate, activeIndex = 0, on
         <div />
 
         {/* Right Menu & Sound controls */}
-        <div className="flex items-center gap-2 sm:gap-3 bg-white/50 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none p-1.5 sm:p-0 rounded-full">
+        <div className="flex items-center gap-1.5 sm:gap-3 p-1 sm:p-0">
           {/* Interactive Developer Terminal Button */}
           <button
             onClick={onOpenTerminal}

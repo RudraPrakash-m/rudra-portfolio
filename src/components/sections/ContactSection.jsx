@@ -29,14 +29,14 @@ export const ContactSection = ({ sectionRef, isActive = true }) => {
     <section
       ref={sectionRef}
       id="contact"
-      className="relative w-full h-full min-h-screen flex items-center justify-end px-5 sm:px-12 lg:px-24 py-16 sm:py-20 pointer-events-none select-none"
+      className="relative w-full h-full min-h-screen flex items-center justify-end px-6 sm:px-12 lg:px-24 py-14 sm:py-20 pointer-events-none select-none"
     >
       <div 
         ref={contentRef}
-        className="w-full max-w-md ml-auto flex flex-col items-center lg:items-end text-center lg:text-right gap-5 sm:gap-6 pointer-events-auto z-20 bg-[#f5f5f5]/65 sm:bg-transparent backdrop-blur-sm sm:backdrop-blur-none p-4 sm:p-0 rounded-3xl"
+        className="w-full max-w-md ml-auto flex flex-col items-center lg:items-end text-center lg:text-right gap-4 sm:gap-6 pointer-events-auto z-20"
       >
         {/* Mail, Phone & Location Details */}
-        <div className="contact-fade space-y-3 sm:space-y-4 w-full">
+        <div className="contact-fade space-y-2.5 sm:space-y-4 w-full">
           {/* Email */}
           <div>
             <p className="text-xs sm:text-sm font-medium text-[#1c1c1c]/60 mb-0.5">
@@ -57,7 +57,7 @@ export const ContactSection = ({ sectionRef, isActive = true }) => {
             <p className="text-xs sm:text-sm font-medium text-[#1c1c1c]/60 mb-0.5">
               Phone Number
             </p>
-            <div className="inline-flex items-center justify-center lg:justify-end gap-2 text-base sm:text-xl font-bold text-[#1c1c1c]">
+            <div className="inline-flex items-center justify-center lg:justify-end gap-2 text-sm sm:text-xl font-bold text-[#1c1c1c]">
               <Phone className="w-4 h-4 text-emerald-600 shrink-0" />
               {showPhone ? (
                 <a href={`tel:${rudraData.phone}`} aria-label={`Call ${rudraData.phone}`} className="hover:underline font-mono">
@@ -146,17 +146,17 @@ export const ContactSection = ({ sectionRef, isActive = true }) => {
         </div>
 
         {/* Download Resume / CV Pill Button */}
-        <div className="contact-fade pt-2">
+        <div className="contact-fade pt-1 sm:pt-2">
           <a
             href={rudraData.resumeUrl || "/Rudra _Prakash.pdf"}
             download="Rudra_Prakash_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Download Rudra Prakash's CV"
-            className="group flex items-center h-12 sm:h-14 pl-2 pr-5 sm:pr-6 rounded-full bg-white text-[#1c1c1c] border border-black/10 hover:border-black/30 shadow-xl transition-all hover:scale-105 active:scale-95 cursor-pointer no-underline"
+            className="group flex items-center h-11 sm:h-14 pl-2 pr-5 sm:pr-6 rounded-full bg-white text-[#1c1c1c] border border-black/10 hover:border-black/30 shadow-xl transition-all hover:scale-105 active:scale-95 cursor-pointer no-underline"
           >
-            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black text-white flex items-center justify-center mr-2.5 sm:mr-3 shadow-md group-hover:translate-y-0.5 transition-transform shrink-0">
-              <ArrowDown className="w-4 h-4 sm:w-5 sm:h-5" />
+            <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-black text-white flex items-center justify-center mr-2 sm:mr-3 shadow-md group-hover:translate-y-0.5 transition-transform shrink-0">
+              <ArrowDown className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
             </div>
             <span className="font-bold text-xs sm:text-sm md:text-base tracking-tight select-none">
               Download CV

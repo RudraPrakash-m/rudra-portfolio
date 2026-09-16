@@ -27,20 +27,20 @@ export const TimelineSection = ({ sectionRef, isActive = true }) => {
     <section
       ref={sectionRef}
       id="timeline"
-      className="relative w-full h-full min-h-screen flex items-center justify-end px-5 sm:px-12 lg:px-24 py-12 sm:py-16 pointer-events-none select-none"
+      className="relative w-full h-full min-h-screen flex items-center justify-end px-6 sm:px-12 lg:px-24 py-12 sm:py-16 pointer-events-none select-none"
     >
       <div 
         ref={contentRef}
-        className="w-full max-w-xl ml-auto flex flex-col items-center lg:items-end text-center lg:text-right gap-3 sm:gap-4 pointer-events-auto z-20 bg-[#f5f5f5]/65 sm:bg-transparent backdrop-blur-sm sm:backdrop-blur-none p-4 sm:p-0 rounded-3xl"
+        className="w-full max-w-xl ml-auto flex flex-col items-center lg:items-end text-center lg:text-right gap-2 sm:gap-3 pointer-events-auto z-20"
       >
         {/* Journey Heading */}
         <div className="timeline-fade w-full flex flex-col items-center lg:items-end">
-          <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[#1c1c1c] mb-2 sm:mb-3">
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[#1c1c1c] mb-1 sm:mb-2">
             Journey
           </h2>
 
           {/* Education & Career Journey Graphic */}
-          <div className="w-full flex justify-center lg:justify-end my-1">
+          <div className="w-full flex justify-center lg:justify-end my-0.5">
             <img 
               src="/journy.png" 
               alt="Rudra Prakash Mallick Education and Career Journey" 
@@ -48,18 +48,18 @@ export const TimelineSection = ({ sectionRef, isActive = true }) => {
               height="380"
               loading="lazy"
               decoding="async"
-              className="w-full max-h-[38vh] sm:max-h-[42vh] max-w-[340px] sm:max-w-md lg:max-w-lg h-auto object-contain rounded-2xl drop-shadow-sm hover:scale-[1.02] transition-transform duration-300"
+              className="w-full max-h-[36vh] sm:max-h-[42vh] max-w-[320px] sm:max-w-md lg:max-w-lg h-auto object-contain rounded-2xl drop-shadow-sm hover:scale-[1.02] transition-transform duration-300"
             />
           </div>
         </div>
 
         {/* Core Technology Stack */}
         <div className="timeline-fade w-full pt-1">
-          <h3 className="text-sm sm:text-base md:text-lg font-bold text-[#1c1c1c] mb-2 text-center lg:text-right">
+          <h3 className="text-xs sm:text-base md:text-lg font-bold text-[#1c1c1c] mb-1.5 text-center lg:text-right">
             Core Technology Stack
           </h3>
 
-          <div className="flex flex-wrap items-center justify-center lg:justify-end gap-1.5 sm:gap-2 max-w-lg ml-auto">
+          <div className="flex flex-wrap items-center justify-center lg:justify-end gap-1 sm:gap-2 max-w-lg ml-auto">
             {rudraData.skills.map((skill, i) => (
               skill === "Git & GitHub" ? (
                 <a 
@@ -67,7 +67,7 @@ export const TimelineSection = ({ sectionRef, isActive = true }) => {
                   href={rudraData.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="px-2.5 sm:px-3 py-1 rounded-full bg-black/10 hover:bg-black text-black hover:text-white text-[11px] sm:text-xs font-mono font-semibold transition-all border border-black/10 cursor-pointer"
+                  className="px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-black/10 hover:bg-black text-black hover:text-white text-[10px] sm:text-xs font-mono font-semibold transition-all border border-black/10 cursor-pointer"
                   title="View GitHub Profile (RudraPrakash-m)"
                 >
                   {skill} ↗
@@ -75,7 +75,7 @@ export const TimelineSection = ({ sectionRef, isActive = true }) => {
               ) : (
                 <span 
                   key={i} 
-                  className="px-2.5 sm:px-3 py-1 rounded-full bg-black/5 hover:bg-black/10 text-[11px] sm:text-xs font-mono text-[#1c1c1c] font-semibold transition-colors border border-black/5"
+                  className="px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-black/5 hover:bg-black/10 text-[10px] sm:text-xs font-mono text-[#1c1c1c] font-semibold transition-colors border border-black/5"
                 >
                   {skill}
                 </span>

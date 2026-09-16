@@ -27,35 +27,35 @@ export const HeroSection = ({ sectionRef, isActive = true }) => {
     <section
       ref={sectionRef}
       id="home"
-      className="relative w-full h-full min-h-screen flex flex-col justify-between px-5 sm:px-12 lg:px-24 py-16 sm:py-20 pointer-events-none select-none"
+      className="relative w-full h-full min-h-screen flex flex-col justify-between px-6 sm:px-12 lg:px-24 py-12 sm:py-20 pointer-events-none select-none"
     >
-      <div className="h-6 sm:h-12" />
+      <div className="h-4 sm:h-12" />
 
-      {/* Main Top / Center Typography */}
+      {/* Main Top / Center Typography - Clean Transparent Layout */}
       <div 
         ref={contentRef}
-        className="w-full max-w-4xl ml-auto text-right space-y-1 sm:space-y-2 pointer-events-auto z-20 pt-4 sm:pt-8 bg-[#f5f5f5]/60 sm:bg-transparent backdrop-blur-sm sm:backdrop-blur-none p-4 sm:p-0 rounded-2xl"
+        className="w-full max-w-4xl ml-auto text-right space-y-1 sm:space-y-2 pointer-events-auto z-20"
       >
-        <p className="hero-fade text-xl sm:text-3xl md:text-4xl font-medium text-[#1c1c1c]/90">
+        <p className="hero-fade text-lg sm:text-3xl md:text-4xl font-medium text-[#1c1c1c]/90">
           Hi,
         </p>
 
-        <h1 className="hero-fade text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] font-bold tracking-tight text-[#1c1c1c] leading-[0.95]">
+        <h1 className="hero-fade text-3xl sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] font-bold tracking-tight text-[#1c1c1c] leading-[0.95]">
           I build.
         </h1>
 
-        <h1 className="hero-fade text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] font-bold tracking-tight text-[#1c1c1c] leading-[0.95]">
+        <h1 className="hero-fade text-3xl sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] font-bold tracking-tight text-[#1c1c1c] leading-[0.95]">
           Ideas launch.
           <span className="block mt-1 sm:mt-3">Simple.</span>
         </h1>
       </div>
 
-      {/* Bottom Right Author Details */}
-      <div className="w-full max-w-4xl ml-auto text-right pointer-events-auto z-20 pt-6 sm:pt-8 bg-[#f5f5f5]/60 sm:bg-transparent backdrop-blur-sm sm:backdrop-blur-none p-3 sm:p-0 rounded-2xl">
+      {/* Bottom Right Author Details - Clean Transparent Layout */}
+      <div className="w-full max-w-4xl ml-auto text-right pointer-events-auto z-20 pb-2 sm:pb-0">
         <h2 className="text-xl sm:text-3xl md:text-4xl font-bold tracking-tight text-[#1c1c1c]">
           {rudraData.name}
         </h2>
-        <div className="flex justify-end items-center gap-4 sm:gap-12 text-xs sm:text-base md:text-lg font-medium text-[#1c1c1c]/80 mt-1">
+        <div className="flex justify-end items-center gap-3 sm:gap-12 text-xs sm:text-base md:text-lg font-medium text-[#1c1c1c]/80 mt-1">
           <p>{rudraData.role}</p>
           <span className="text-neutral-400">&bull;</span>
           <p>MERN Stack</p>
