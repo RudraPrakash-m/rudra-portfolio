@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="rudraGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Sleek rounded square background -->
+  <rect width="64" height="64" rx="18" fill="#090a0f" />
+  <rect width="60" height="60" x="2" y="2" rx="16" fill="none" stroke="url(#rudraGrad)" stroke-width="1.5" stroke-opacity="0.5" />
+
+  <!-- Stylized Monogram "R" -->
+  <g fill="none" stroke="url(#rudraGrad)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Vertical stem -->
+    <path d="M22 17v30" />
+    <!-- Loop -->
+    <path d="M22 17h11c5.5 0 9 3.5 9 8s-3.5 8-9 8H22" />
+    <!-- Diagonal Leg with energetic kick -->
+    <path d="M32 33l11 14" />
+  </g>
+
+  <!-- Accent glow dot -->
+  <circle cx="43" cy="18" r="3.5" fill="#10b981" filter="url(#glow)" />
+</svg>
