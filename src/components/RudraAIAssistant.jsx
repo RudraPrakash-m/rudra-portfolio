@@ -187,7 +187,7 @@ Ask me anything about Rudra's full-stack MERN expertise, WorkEasy security archi
           </div>
 
           {/* Message History Stream */}
-          <div className="flex-1 p-3.5 sm:p-4 overflow-y-auto space-y-3.5 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
+          <div className="flex-1 p-3.5 sm:p-4 overflow-y-auto space-y-3.5 no-scrollbar">
             {messages.map((msg) => (
               <div 
                 key={msg.id}

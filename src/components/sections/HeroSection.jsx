@@ -36,15 +36,15 @@ export const HeroSection = ({ sectionRef, isActive = true }) => {
         ref={contentRef}
         className="w-full max-w-4xl ml-auto text-right space-y-1 sm:space-y-2 pointer-events-auto z-20"
       >
-        <p className="hero-fade text-lg sm:text-3xl md:text-4xl font-medium text-[#1c1c1c]/90">
+        <p className="hero-fade text-lg sm:text-3xl md:text-4xl font-medium text-white sm:text-[#1c1c1c]/90 mobile-text-glow sm:[text-shadow:none]">
           Hi,
         </p>
 
-        <h1 className="hero-fade text-3xl sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] font-bold tracking-tight text-[#1c1c1c] leading-[0.95]">
+        <h1 className="hero-fade text-3xl sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] font-bold tracking-tight text-white sm:text-[#1c1c1c] leading-[0.95] mobile-text-glow sm:[text-shadow:none]">
           I build.
         </h1>
 
-        <h1 className="hero-fade text-3xl sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] font-bold tracking-tight text-[#1c1c1c] leading-[0.95]">
+        <h1 className="hero-fade text-3xl sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] font-bold tracking-tight text-white sm:text-[#1c1c1c] leading-[0.95] mobile-text-glow sm:[text-shadow:none]">
           Ideas launch.
           <span className="block mt-1 sm:mt-3">Simple.</span>
         </h1>
@@ -52,12 +52,12 @@ export const HeroSection = ({ sectionRef, isActive = true }) => {
 
       {/* Bottom Right Author Details - Clean Transparent Layout */}
       <div className="w-full max-w-4xl ml-auto text-right pointer-events-auto z-20 pb-2 sm:pb-0">
-        <h2 className="text-xl sm:text-3xl md:text-4xl font-bold tracking-tight text-[#1c1c1c]">
+        <h2 className="text-xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white sm:text-[#1c1c1c] mobile-text-glow sm:[text-shadow:none]">
           {rudraData.name}
         </h2>
-        <div className="flex justify-end items-center gap-3 sm:gap-12 text-xs sm:text-base md:text-lg font-medium text-[#1c1c1c]/80 mt-1">
+        <div className="flex justify-end items-center gap-3 sm:gap-12 text-xs sm:text-base md:text-lg font-medium text-neutral-200 sm:text-[#1c1c1c]/80 mt-1 mobile-subtext-glow sm:[text-shadow:none]">
           <p>{rudraData.role}</p>
-          <span className="text-neutral-400">&bull;</span>
+          <span className="text-neutral-300 sm:text-neutral-400">&bull;</span>
           <p>MERN Stack</p>
         </div>
       </div>

@@ -21,23 +21,38 @@
   }
 }
 
-/* Custom Minimal Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
+/* Clean Invisible Scrollbars Globally */
+* {
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* IE and Edge */
 }
-::-webkit-scrollbar-track {
-  background: #f5f5f5;
+
+*::-webkit-scrollbar {
+  display: none !important; /* Chrome, Safari, Opera */
+  width: 0px !important;
+  height: 0px !important;
 }
-::-webkit-scrollbar-thumb {
-  background: #d4d4d8;
-  border-radius: 9999px;
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: #a1a1aa;
+.no-scrollbar {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
 }
 
 /* Smooth transitions */
 .snap-section {
   min-height: 100vh;
   width: 100%;
+}
+
+/* Mobile High-Contrast Text Clarity */
+@layer utilities {
+  .mobile-text-glow {
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95), 0 0 3px rgba(0, 0, 0, 0.9);
+  }
+  .mobile-subtext-glow {
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.9), 0 0 2px rgba(0, 0, 0, 0.85);
+  }
 }

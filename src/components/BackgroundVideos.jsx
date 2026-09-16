@@ -38,7 +38,7 @@ export const BackgroundVideos = forwardRef(({ isMuted, activeIndex }, ref) => {
           video.currentTime = 0;
           const playPromise = video.play();
           if (playPromise !== undefined) {
-            playPromise.catch(() => {});
+            playPromise.catch(() => { });
           }
         } else {
           video.pause();
@@ -75,6 +75,14 @@ export const BackgroundVideos = forwardRef(({ isMuted, activeIndex }, ref) => {
           </div>
         );
       })}
+
+      {/* Cinematic Mobile Ambient Contrast Overlay (Ensures 100% white text clarity across both dark character and white studio backdrop) */}
+      <div
+        className="sm:hidden fixed inset-0 pointer-events-none z-20"
+        style={{
+          background: 'linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.1) 35%, rgba(0,0,0,0.5) 100%), linear-gradient(to left, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.15) 55%, transparent 100%)'
+        }}
+      />
     </div>
   );
 });

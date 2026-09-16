@@ -297,49 +297,49 @@ Type 'exit' or press ESC / Ctrl+K to close.`
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-6 bg-black/70 backdrop-blur-md animate-in fade-in duration-200">
       <div
-        className={`w-full ${isMaximized ? 'h-[94vh] max-w-[96vw]' : 'max-w-2xl h-[520px] max-h-[85vh]'} flex flex-col rounded-2xl bg-[#0d1117]/95 border border-emerald-500/30 shadow-[0_0_50px_rgba(16,185,129,0.15)] backdrop-blur-2xl overflow-hidden transition-all duration-300 font-mono`}
+        className={`w-full ${isMaximized ? 'h-[96vh] max-w-[98vw]' : 'max-w-2xl h-[85vh] sm:h-[520px] max-h-[90vh]'} flex flex-col rounded-2xl bg-[#0d1117]/95 border border-emerald-500/30 shadow-[0_0_50px_rgba(16,185,129,0.15)] backdrop-blur-2xl overflow-hidden transition-all duration-300 font-mono`}
       >
         {/* Top Window Titlebar */}
-        <div className="flex items-center justify-between px-4 py-3 bg-[#161b22] border-b border-white/10 select-none">
-          <div className="flex items-center gap-2">
+        <div className="flex items-center justify-between px-3.5 sm:px-4 py-2.5 sm:py-3 bg-[#161b22] border-b border-white/10 select-none">
+          <div className="flex items-center gap-2 min-w-0">
             <button
               onClick={() => setIsOpen(false)}
-              className="w-3 h-3 rounded-full bg-red-500 hover:opacity-80 transition-opacity"
+              className="w-3 h-3 rounded-full bg-red-500 hover:opacity-80 transition-opacity shrink-0 cursor-pointer"
               title="Close (ESC)"
             />
             <button
               onClick={() => setIsMaximized(!isMaximized)}
-              className="w-3 h-3 rounded-full bg-yellow-500 hover:opacity-80 transition-opacity"
+              className="w-3 h-3 rounded-full bg-yellow-500 hover:opacity-80 transition-opacity shrink-0 cursor-pointer hidden sm:block"
               title="Minimize / Maximize"
             />
             <button
               onClick={() => setIsMaximized(!isMaximized)}
-              className="w-3 h-3 rounded-full bg-emerald-500 hover:opacity-80 transition-opacity"
+              className="w-3 h-3 rounded-full bg-emerald-500 hover:opacity-80 transition-opacity shrink-0 cursor-pointer hidden sm:block"
               title="Expand"
             />
-            <span className="ml-3 text-xs text-neutral-400 font-mono flex items-center gap-1.5">
-              <TerminalIcon className="w-3.5 h-3.5 text-emerald-400" />
-              rudra@developer-box:~ (zsh)
+            <span className="ml-1 sm:ml-3 text-[11px] sm:text-xs text-neutral-300 font-mono flex items-center gap-1.5 truncate">
+              <TerminalIcon className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+              <span className="truncate">rudra@portfolio:~ (cmd)</span>
             </span>
           </div>
 
-          <div className="flex items-center gap-3 text-[11px] text-neutral-400">
-            <span className="hidden sm:inline bg-black/40 px-2 py-0.5 rounded border border-white/5 font-mono">
+          <div className="flex items-center gap-2 sm:gap-3 text-[11px] text-neutral-400 shrink-0">
+            <span className="hidden md:inline bg-black/40 px-2 py-0.5 rounded border border-white/5 font-mono">
               Ctrl+K
             </span>
             <button
               onClick={() => setIsMaximized(!isMaximized)}
-              className="hover:text-white p-1"
+              className="hover:text-white p-1 hidden sm:block cursor-pointer"
               title={isMaximized ? "Restore" : "Maximize"}
             >
               {isMaximized ? <Minimize2 className="w-3.5 h-3.5" /> : <Maximize2 className="w-3.5 h-3.5" />}
             </button>
             <button
               onClick={() => setIsOpen(false)}
-              className="hover:text-white p-1"
-              title="Close"
+              className="hover:text-white p-1 cursor-pointer"
+              title="Close Terminal"
             >
               <X className="w-4 h-4" />
             </button>
@@ -349,22 +349,22 @@ Type 'exit' or press ESC / Ctrl+K to close.`
         {/* Terminal Body Content */}
         <div
           onClick={() => inputRef.current?.focus()}
-          className="flex-1 p-4 sm:p-5 overflow-y-auto space-y-3 cursor-text text-sm scrollbar-thin scrollbar-thumb-emerald-900 scrollbar-track-transparent"
+          className="flex-1 p-3 sm:p-5 overflow-y-auto space-y-3 cursor-text text-xs sm:text-sm no-scrollbar"
         >
           {history.map((item, idx) => (
             <div key={idx}>
               {item.type === 'system' && (
-                <pre className="text-xs sm:text-sm text-neutral-400 whitespace-pre-wrap font-mono leading-relaxed">
+                <pre className="text-[11px] sm:text-xs md:text-sm text-neutral-400 whitespace-pre-wrap font-mono leading-relaxed">
                   {item.text}
                 </pre>
               )}
               {item.type === 'input' && (
-                <div className="text-emerald-400 font-mono font-semibold flex items-center gap-2">
+                <div className="text-emerald-400 font-mono font-semibold flex items-center gap-2 text-xs sm:text-sm break-all">
                   <span>{item.text}</span>
                 </div>
               )}
               {item.type === 'output' && (
-                <div className="py-1">{item.content}</div>
+                <div className="py-0.5">{item.content}</div>
               )}
               {item.type === 'error' && (
                 <p className="text-red-400 text-xs sm:text-sm font-mono">{item.text}</p>
@@ -372,10 +372,33 @@ Type 'exit' or press ESC / Ctrl+K to close.`
             </div>
           ))}
 
+          {/* Quick Mobile Suggestion Chips */}
+          <div className="pt-2">
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none no-scrollbar">
+              <span className="text-[10px] text-neutral-500 font-mono shrink-0">Quick:</span>
+              {['help', 'skills', 'projects', 'journey', 'contact', 'resume', 'clear'].map((chip) => (
+                <button
+                  key={chip}
+                  type="button"
+                  onClick={() => {
+                    setInputVal(chip);
+                    setTimeout(() => {
+                      handleCommand({ key: 'Enter' });
+                    }, 50);
+                  }}
+                  className="px-2 py-0.5 rounded-full bg-emerald-950/60 hover:bg-emerald-900/80 border border-emerald-500/30 text-emerald-300 text-[10px] font-mono shrink-0 cursor-pointer active:scale-95 transition-transform"
+                >
+                  {chip}
+                </button>
+              ))}
+            </div>
+          </div>
+
           {/* Active Input Line */}
-          <div className="flex items-center gap-2 pt-1">
-            <span className="text-emerald-400 font-bold shrink-0 font-mono">
-              rudra@portfolio:~$
+          <div className="flex items-center gap-1.5 sm:gap-2 pt-1">
+            <span className="text-emerald-400 font-bold shrink-0 font-mono text-xs sm:text-sm">
+              <span className="sm:hidden">rudra:~$</span>
+              <span className="hidden sm:inline">rudra@portfolio:~$</span>
             </span>
             <input
               ref={inputRef}
@@ -386,15 +409,15 @@ Type 'exit' or press ESC / Ctrl+K to close.`
               autoFocus
               spellCheck={false}
               autoComplete="off"
-              className="flex-1 bg-transparent border-none outline-none text-white font-mono text-sm caret-emerald-400 p-0"
+              className="flex-1 min-w-0 bg-transparent border-none outline-none text-white font-mono text-xs sm:text-sm caret-emerald-400 p-0"
               placeholder="type 'help'..."
             />
             <button
               onClick={() => handleCommand({ key: 'Enter' })}
-              className="p-1 rounded text-emerald-400/60 hover:text-emerald-400 sm:hidden"
+              className="p-1 rounded bg-emerald-500/20 hover:bg-emerald-500/40 text-emerald-400 cursor-pointer shrink-0 active:scale-90 transition-transform"
               title="Run Command"
             >
-              <CornerDownLeft className="w-4 h-4" />
+              <CornerDownLeft className="w-3.5 h-3.5" />
             </button>
           </div>
 
@@ -402,15 +425,25 @@ Type 'exit' or press ESC / Ctrl+K to close.`
         </div>
 
         {/* Terminal Bottom Bar */}
-        <div className="px-4 py-2 bg-[#161b22] border-t border-white/10 flex items-center justify-between text-[11px] text-neutral-400 select-none">
-          <div className="flex items-center gap-2">
+        <div className="px-3 sm:px-4 py-2 bg-[#161b22] border-t border-white/10 flex items-center justify-between text-[10px] sm:text-[11px] text-neutral-400 select-none">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
             <span className="text-emerald-400 font-semibold">ONLINE</span>
             <span>• zsh 5.9</span>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 text-[10px]">
             <span className="hidden sm:inline">TAB for autocomplete</span>
             <span className="hidden sm:inline">↑↓ for history</span>
+            <button
+              type="button"
+              onClick={() => {
+                setHistory([]);
+                setInputVal('');
+              }}
+              className="text-neutral-400 hover:text-white cursor-pointer font-mono"
+            >
+              Clear Buffer
+            </button>
           </div>
         </div>
       </div>

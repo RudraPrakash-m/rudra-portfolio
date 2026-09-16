@@ -26,15 +26,15 @@ export const HeaderNav = ({ isMuted, setIsMuted, onNavigate, activeIndex = 0, on
         <div />
 
         {/* Right Menu & Sound controls */}
-        <div className="flex items-center gap-1.5 sm:gap-3 p-1 sm:p-0">
+        <div className="flex items-center gap-1.5 sm:gap-3 p-1 sm:p-0 bg-black/30 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none rounded-full px-2 sm:px-0 border border-white/20 sm:border-transparent">
           {/* Interactive Developer Terminal Button */}
           <button
             onClick={onOpenTerminal}
             aria-label="Open Developer Terminal (Ctrl+K)"
-            className="p-2 rounded-full hover:bg-black/5 transition-colors flex items-center justify-center cursor-pointer text-[#1c1c1c] group relative"
+            className="p-1.5 sm:p-2 rounded-full hover:bg-black/5 transition-colors flex items-center justify-center cursor-pointer text-white sm:text-[#1c1c1c] group relative"
             title="Developer CLI Terminal (Ctrl+K)"
           >
-            <Terminal className="w-5 h-5 text-neutral-700 group-hover:text-emerald-600 transition-colors" />
+            <Terminal className="w-5 h-5 text-white sm:text-neutral-700 group-hover:text-emerald-400 sm:group-hover:text-emerald-600 transition-colors" />
             <span className="hidden md:inline-block ml-1 text-[11px] font-mono font-bold text-neutral-500 group-hover:text-emerald-600">
               CLI
             </span>
@@ -44,20 +44,20 @@ export const HeaderNav = ({ isMuted, setIsMuted, onNavigate, activeIndex = 0, on
           <button
             onClick={() => setIsMuted(!isMuted)}
             aria-label={isMuted ? "Unmute Background Audio" : "Mute Background Audio"}
-            className="p-2 rounded-full hover:bg-black/5 transition-colors flex items-center justify-center cursor-pointer text-[#1c1c1c]"
+            className="p-1.5 sm:p-2 rounded-full hover:bg-black/5 transition-colors flex items-center justify-center cursor-pointer text-white sm:text-[#1c1c1c]"
             title={isMuted ? "Unmute Audio" : "Mute Audio"}
           >
-            {isMuted ? <VolumeX className="w-5 h-5 text-neutral-400" /> : <Volume2 className="w-5 h-5 text-black" />}
+            {isMuted ? <VolumeX className="w-5 h-5 text-neutral-300 sm:text-neutral-400" /> : <Volume2 className="w-5 h-5 text-white sm:text-black" />}
           </button>
 
           {/* Minimalist Hamburger Button */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label={menuOpen ? "Close Navigation Menu" : "Open Navigation Menu"}
-            className="p-2 rounded-full hover:bg-black/5 transition-colors flex items-center justify-center cursor-pointer text-[#1c1c1c]"
+            className="p-1.5 sm:p-2 rounded-full hover:bg-black/5 transition-colors flex items-center justify-center cursor-pointer text-white sm:text-[#1c1c1c]"
             title="Menu"
           >
-            {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6 stroke-[2]" />}
+            {menuOpen ? <X className="w-6 h-6 text-white sm:text-black" /> : <Menu className="w-6 h-6 stroke-[2] text-white sm:text-black" />}
           </button>
         </div>
       </header>

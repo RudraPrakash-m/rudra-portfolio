@@ -39,13 +39,13 @@ export const ContactSection = ({ sectionRef, isActive = true }) => {
         <div className="contact-fade space-y-2.5 sm:space-y-4 w-full">
           {/* Email */}
           <div>
-            <p className="text-xs sm:text-sm font-medium text-[#1c1c1c]/60 mb-0.5">
+            <p className="text-xs sm:text-sm font-medium text-neutral-200 sm:text-[#1c1c1c]/60 mb-0.5 mobile-subtext-glow sm:[text-shadow:none]">
               Mail me
             </p>
             <a 
               href={`mailto:${rudraData.email}`}
               aria-label={`Send email to ${rudraData.email}`}
-              className="text-base sm:text-xl md:text-2xl font-bold text-[#1c1c1c] hover:opacity-70 transition-opacity inline-flex items-center gap-1.5 break-all"
+              className="text-base sm:text-xl md:text-2xl font-bold text-white sm:text-[#1c1c1c] hover:text-emerald-300 sm:hover:opacity-70 transition-colors sm:transition-opacity inline-flex items-center gap-1.5 break-all mobile-text-glow sm:[text-shadow:none]"
             >
               <span>{rudraData.email}</span>
               <ArrowUpRight className="w-4 h-4 shrink-0" />
@@ -54,47 +54,47 @@ export const ContactSection = ({ sectionRef, isActive = true }) => {
 
           {/* Phone with View & Hide Toggle */}
           <div>
-            <p className="text-xs sm:text-sm font-medium text-[#1c1c1c]/60 mb-0.5">
+            <p className="text-xs sm:text-sm font-medium text-neutral-200 sm:text-[#1c1c1c]/60 mb-0.5 mobile-subtext-glow sm:[text-shadow:none]">
               Phone Number
             </p>
-            <div className="inline-flex items-center justify-center lg:justify-end gap-2 text-sm sm:text-xl font-bold text-[#1c1c1c]">
-              <Phone className="w-4 h-4 text-emerald-600 shrink-0" />
+            <div className="inline-flex items-center justify-center lg:justify-end gap-2 text-sm sm:text-xl font-bold text-white sm:text-[#1c1c1c] mobile-text-glow sm:[text-shadow:none]">
+              <Phone className="w-4 h-4 text-emerald-400 sm:text-emerald-600 shrink-0" />
               {showPhone ? (
                 <a href={`tel:${rudraData.phone}`} aria-label={`Call ${rudraData.phone}`} className="hover:underline font-mono">
                   {rudraData.phone}
                 </a>
               ) : (
-                <span className="font-mono tracking-wider text-[#1c1c1c]/80">+91 **********</span>
+                <span className="font-mono tracking-wider text-neutral-200 sm:text-[#1c1c1c]/80">+91 **********</span>
               )}
               <button
                 type="button"
                 onClick={() => setShowPhone(!showPhone)}
                 aria-label={showPhone ? "Hide Phone Number" : "View Phone Number"}
-                className="p-1.5 rounded-full hover:bg-black/5 transition-colors cursor-pointer text-neutral-600 hover:text-black"
+                className="p-1.5 rounded-full bg-white/10 sm:bg-transparent hover:bg-white/20 sm:hover:bg-black/5 transition-colors cursor-pointer text-neutral-200 sm:text-neutral-600 hover:text-white sm:hover:text-black"
                 title={showPhone ? "Hide Phone Number" : "View Phone Number"}
               >
-                {showPhone ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4 text-emerald-600" />}
+                {showPhone ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4 text-emerald-400 sm:text-emerald-600" />}
               </button>
             </div>
           </div>
 
           {/* Location */}
           <div>
-            <p className="text-xs sm:text-sm font-medium text-[#1c1c1c]/60 mb-0.5">
+            <p className="text-xs sm:text-sm font-medium text-neutral-200 sm:text-[#1c1c1c]/60 mb-0.5 mobile-subtext-glow sm:[text-shadow:none]">
               Meet me in
             </p>
-            <p className="text-base sm:text-lg font-bold text-[#1c1c1c]">
+            <p className="text-base sm:text-lg font-bold text-white sm:text-[#1c1c1c] mobile-text-glow sm:[text-shadow:none]">
               {rudraData.location}
             </p>
           </div>
         </div>
 
         {/* Profile Stalk Title */}
-        <p className="contact-fade text-xs sm:text-sm font-medium text-[#1c1c1c]/60 -mb-2">
+        <p className="contact-fade text-xs sm:text-sm font-medium text-neutral-200 sm:text-[#1c1c1c]/60 -mb-2 mobile-subtext-glow sm:[text-shadow:none]">
           or stalk my profiles
         </p>
 
-        {/* 4 Black Circular Social Icons */}
+        {/* 4 Social Icons */}
         <div className="contact-fade flex items-center gap-2.5 sm:gap-3 justify-center lg:justify-end">
           {/* LinkedIn */}
           <a
@@ -102,7 +102,7 @@ export const ContactSection = ({ sectionRef, isActive = true }) => {
             target="_blank"
             rel="noreferrer"
             aria-label="LinkedIn Profile"
-            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black text-white flex items-center justify-center hover:scale-110 transition-transform shadow-md shrink-0"
+            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/80 sm:bg-black border border-white/20 sm:border-transparent text-white flex items-center justify-center hover:scale-110 transition-transform shadow-lg shrink-0"
             title="LinkedIn Profile"
           >
             <svg className="w-4 h-4 sm:w-5 sm:h-5 fill-white" viewBox="0 0 24 24">
@@ -116,7 +116,7 @@ export const ContactSection = ({ sectionRef, isActive = true }) => {
             target="_blank"
             rel="noreferrer"
             aria-label="GitHub Profile"
-            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black text-white flex items-center justify-center hover:scale-110 transition-transform shadow-md shrink-0"
+            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/80 sm:bg-black border border-white/20 sm:border-transparent text-white flex items-center justify-center hover:scale-110 transition-transform shadow-lg shrink-0"
             title="GitHub Profile"
           >
             <svg className="w-4 h-4 sm:w-5 sm:h-5 fill-white" viewBox="0 0 24 24">
@@ -128,7 +128,7 @@ export const ContactSection = ({ sectionRef, isActive = true }) => {
           <a
             href={`mailto:${rudraData.email}`}
             aria-label="Send Email Directly"
-            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black text-white flex items-center justify-center hover:scale-110 transition-transform shadow-md shrink-0"
+            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/80 sm:bg-black border border-white/20 sm:border-transparent text-white flex items-center justify-center hover:scale-110 transition-transform shadow-lg shrink-0"
             title="Send Email"
           >
             <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
@@ -138,7 +138,7 @@ export const ContactSection = ({ sectionRef, isActive = true }) => {
           <a
             href={`tel:${rudraData.phone}`}
             aria-label={`Call ${rudraData.phone}`}
-            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black text-white flex items-center justify-center hover:scale-110 transition-transform shadow-md shrink-0"
+            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/80 sm:bg-black border border-white/20 sm:border-transparent text-white flex items-center justify-center hover:scale-110 transition-transform shadow-lg shrink-0"
             title="Call"
           >
             <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
