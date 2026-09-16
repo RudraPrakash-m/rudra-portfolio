@@ -1,7 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
-import Lenis from 'lenis';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { BackgroundVideos } from './components/BackgroundVideos';
 import { HeaderNav } from './components/HeaderNav';
 import { SEO } from './components/SEO';
@@ -12,73 +9,109 @@ import { PersonalCardsSection } from './components/sections/PersonalCardsSection
 import { ContactSection } from './components/sections/ContactSection';
 import './index.css';
 
-gsap.registerPlugin(ScrollTrigger);
-
 const App = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
 
   const bgVideosRef = useRef(null);
+  const isTransitioningRef = useRef(false);
+  const activeIndexRef = useRef(0);
 
-  // 5 Section References
-  const section1Ref = useRef(null);
-  const section2Ref = useRef(null);
-  const section3Ref = useRef(null);
-  const section4Ref = useRef(null);
-  const section5Ref = useRef(null);
-
-  const sectionRefs = [section1Ref, section2Ref, section3Ref, section4Ref, section5Ref];
-
+  // Sync ref with state
   useEffect(() => {
-    // 1. Initialize Lenis Smooth Scrolling
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      touchMultiplier: 1.3,
-    });
+    activeIndexRef.current = activeIndex;
+  }, [activeIndex]);
 
-    lenis.on('scroll', ScrollTrigger.update);
+  // Smooth Transition to Target Section
+  const goToSection = useCallback((targetIndex) => {
+    if (targetIndex < 0 || targetIndex > 4) return;
+    if (targetIndex === activeIndexRef.current) return;
 
-    const tickerCallback = (time) => {
-      lenis.raf(time * 1000);
-    };
+    isTransitioningRef.current = true;
+    setActiveIndex(targetIndex);
 
-    gsap.ticker.add(tickerCallback);
-    gsap.ticker.lagSmoothing(0);
-
-    // 2. Setup GSAP ScrollTrigger to switch video as each screen enters view
-    const triggers = [];
-
-    sectionRefs.forEach((ref, index) => {
-      const sectionEl = ref.current;
-      if (!sectionEl) return;
-
-      const trigger = ScrollTrigger.create({
-        trigger: sectionEl,
-        start: 'top 50%',
-        end: 'bottom 50%',
-        onEnter: () => setActiveIndex(index),
-        onEnterBack: () => setActiveIndex(index),
-      });
-
-      triggers.push(trigger);
-    });
-
-    const refreshTimer = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 400);
-
-    return () => {
-      clearTimeout(refreshTimer);
-      gsap.ticker.remove(tickerCallback);
-      lenis.destroy();
-      triggers.forEach((t) => t.kill());
-    };
+    setTimeout(() => {
+      isTransitioningRef.current = false;
+    }, 850);
   }, []);
 
+  useEffect(() => {
+    // 1. Mouse Wheel with small threshold for automatic smooth section glide
+    const handleWheel = (e) => {
+      if (isTransitioningRef.current) return;
+
+      // Small scroll delta triggers next / previous section smoothly
+      if (Math.abs(e.deltaY) > 8) {
+        if (e.deltaY > 0 && activeIndexRef.current < 4) {
+          goToSection(activeIndexRef.current + 1);
+        } else if (e.deltaY < 0 && activeIndexRef.current > 0) {
+          goToSection(activeIndexRef.current - 1);
+        }
+      }
+    };
+
+    // 2. Touch Gestures for mobile smooth section gliding
+    let touchStartY = 0;
+    let touchStartX = 0;
+
+    const handleTouchStart = (e) => {
+      if (e.touches && e.touches.length > 0) {
+        touchStartY = e.touches[0].clientY;
+        touchStartX = e.touches[0].clientX;
+      }
+    };
+
+    const handleTouchEnd = (e) => {
+      if (isTransitioningRef.current) return;
+      if (e.changedTouches && e.changedTouches.length > 0) {
+        const touchEndY = e.changedTouches[0].clientY;
+        const touchEndX = e.changedTouches[0].clientX;
+        const diffY = touchStartY - touchEndY;
+        const diffX = touchStartX - touchEndX;
+
+        // If swipe gesture is detected (> 30px)
+        if (Math.abs(diffY) > 30 && Math.abs(diffY) > Math.abs(diffX)) {
+          if (diffY > 0 && activeIndexRef.current < 4) {
+            goToSection(activeIndexRef.current + 1);
+          } else if (diffY < 0 && activeIndexRef.current > 0) {
+            goToSection(activeIndexRef.current - 1);
+          }
+        }
+      }
+    };
+
+    // 3. Keyboard Navigation
+    const handleKeyDown = (e) => {
+      if (isTransitioningRef.current) return;
+
+      if (e.key === 'ArrowDown' || e.key === 'PageDown' || (e.key === ' ' && !e.shiftKey)) {
+        if (activeIndexRef.current < 4) {
+          e.preventDefault();
+          goToSection(activeIndexRef.current + 1);
+        }
+      } else if (e.key === 'ArrowUp' || e.key === 'PageUp' || (e.key === ' ' && e.shiftKey)) {
+        if (activeIndexRef.current > 0) {
+          e.preventDefault();
+          goToSection(activeIndexRef.current - 1);
+        }
+      }
+    };
+
+    window.addEventListener('wheel', handleWheel, { passive: true });
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd, { passive: true });
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchend', handleTouchEnd);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [goToSection]);
+
   return (
-    <div className="relative min-h-screen bg-[#f5f5f5] text-[#1c1c1c] selection:bg-black selection:text-white overflow-x-hidden font-['Quicksand']">
+    <div className="fixed inset-0 w-full h-full overflow-hidden bg-[#f5f5f5] text-[#1c1c1c] selection:bg-black selection:text-white font-['Quicksand']">
       {/* SEO & Meta Tags */}
       <SEO />
 
@@ -89,28 +122,63 @@ const App = () => {
         activeIndex={activeIndex} 
       />
 
-      {/* Minimalist Top Right Header */}
+      {/* Minimalist Top Right Header with Smooth Section Links */}
       <HeaderNav 
         isMuted={isMuted} 
-        setIsMuted={setIsMuted} 
+        setIsMuted={setIsMuted}
+        onNavigate={goToSection}
+        activeIndex={activeIndex}
       />
 
-      {/* 5 Distinct Portfolio Screens */}
-      <main className="relative z-10 w-full">
+      {/* Floating Minimalist Section Indicators (Desktop Right) */}
+      <div className="hidden lg:flex fixed right-6 top-1/2 -translate-y-1/2 z-40 flex-col items-center gap-3">
+        {[0, 1, 2, 3, 4].map((idx) => (
+          <button
+            key={idx}
+            onClick={() => goToSection(idx)}
+            aria-label={`Go to section ${idx + 1}`}
+            className={`w-2.5 transition-all duration-300 rounded-full cursor-pointer ${
+              activeIndex === idx
+                ? 'h-8 bg-black'
+                : 'h-2.5 bg-black/25 hover:bg-black/50'
+            }`}
+            title={`Section 0${idx + 1}`}
+          />
+        ))}
+      </div>
+
+      {/* 5 Smooth-Sliding Full-Screen Sections */}
+      <main 
+        className="relative z-10 w-full h-full will-change-transform"
+        style={{
+          transform: `translate3d(0, -${activeIndex * 100}%, 0)`,
+          transition: 'transform 0.85s cubic-bezier(0.65, 0, 0.35, 1)',
+        }}
+      >
         {/* Screen 1: Home / Intro (Video 1) */}
-        <HeroSection sectionRef={section1Ref} />
+        <div className="w-full h-screen h-[100dvh] shrink-0 overflow-hidden flex flex-col justify-between">
+          <HeroSection isActive={activeIndex === 0} />
+        </div>
 
         {/* Screen 2: Works Folder List (Video 2) */}
-        <WorksSection sectionRef={section2Ref} />
+        <div className="w-full h-screen h-[100dvh] shrink-0 overflow-hidden flex items-center justify-end">
+          <WorksSection isActive={activeIndex === 1} />
+        </div>
 
         {/* Screen 3: Timeline & Collaborations (Video 3) */}
-        <TimelineSection sectionRef={section3Ref} />
+        <div className="w-full h-screen h-[100dvh] shrink-0 overflow-hidden flex items-center justify-end">
+          <TimelineSection isActive={activeIndex === 2} />
+        </div>
 
         {/* Screen 4: Interactive Stacked Cards (Video 4) */}
-        <PersonalCardsSection sectionRef={section4Ref} />
+        <div className="w-full h-screen h-[100dvh] shrink-0 overflow-hidden flex items-center justify-end">
+          <PersonalCardsSection isActive={activeIndex === 3} />
+        </div>
 
         {/* Screen 5: Profiles & Download Resume (Video 5) */}
-        <ContactSection sectionRef={section5Ref} />
+        <div className="w-full h-screen h-[100dvh] shrink-0 overflow-hidden flex items-center justify-end">
+          <ContactSection isActive={activeIndex === 4} />
+        </div>
       </main>
     </div>
   );

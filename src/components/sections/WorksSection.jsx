@@ -3,41 +3,32 @@ import gsap from 'gsap';
 import { Folder, FileText, ArrowUpRight } from 'lucide-react';
 import { rudraData } from '../../data/videos';
 
-export const WorksSection = ({ sectionRef }) => {
+export const WorksSection = ({ sectionRef, isActive = true }) => {
   const contentRef = useRef(null);
 
   useEffect(() => {
+    if (!isActive) return;
     const el = contentRef.current;
-    if (!el || !sectionRef.current) return;
+    if (!el) return;
 
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        el.querySelectorAll('.work-row'),
-        { x: 30, opacity: 0 },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 0.6,
-          stagger: 0.1,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 60%',
-            end: 'bottom 40%',
-            toggleActions: 'play reverse play reverse',
-          },
-        }
-      );
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, [sectionRef]);
+    gsap.fromTo(
+      el.querySelectorAll('.work-row'),
+      { x: 30, opacity: 0 },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 0.6,
+        stagger: 0.08,
+        ease: 'power2.out',
+      }
+    );
+  }, [isActive]);
 
   return (
     <section
       ref={sectionRef}
       id="works"
-      className="relative w-full min-h-screen flex items-center justify-end px-5 sm:px-12 lg:px-24 py-16 sm:py-20 pointer-events-none select-none"
+      className="relative w-full h-full min-h-screen flex items-center justify-end px-5 sm:px-12 lg:px-24 py-16 sm:py-20 pointer-events-none select-none"
     >
       <div 
         ref={contentRef}

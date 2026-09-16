@@ -2,41 +2,32 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { rudraData } from '../../data/videos';
 
-export const TimelineSection = ({ sectionRef }) => {
+export const TimelineSection = ({ sectionRef, isActive = true }) => {
   const contentRef = useRef(null);
 
   useEffect(() => {
+    if (!isActive) return;
     const el = contentRef.current;
-    if (!el || !sectionRef.current) return;
+    if (!el) return;
 
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        el.querySelectorAll('.timeline-fade'),
-        { y: 30, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 60%',
-            end: 'bottom 40%',
-            toggleActions: 'play reverse play reverse',
-          },
-        }
-      );
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, [sectionRef]);
+    gsap.fromTo(
+      el.querySelectorAll('.timeline-fade'),
+      { y: 30, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: 'power2.out',
+      }
+    );
+  }, [isActive]);
 
   return (
     <section
       ref={sectionRef}
       id="timeline"
-      className="relative w-full min-h-screen flex items-center justify-end px-5 sm:px-12 lg:px-24 py-16 sm:py-20 pointer-events-none select-none"
+      className="relative w-full h-full min-h-screen flex items-center justify-end px-5 sm:px-12 lg:px-24 py-16 sm:py-20 pointer-events-none select-none"
     >
       <div 
         ref={contentRef}

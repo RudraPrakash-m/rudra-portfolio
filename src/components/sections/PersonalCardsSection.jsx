@@ -1,9 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { Sparkles, Code2, Server, Layout, Cpu } from 'lucide-react';
-import { rudraData } from '../../data/videos';
 
-export const PersonalCardsSection = ({ sectionRef }) => {
+export const PersonalCardsSection = ({ sectionRef, isActive = true }) => {
   const contentRef = useRef(null);
   const [activeDeck, setActiveDeck] = useState(0);
 
@@ -15,38 +14,29 @@ export const PersonalCardsSection = ({ sectionRef }) => {
   ];
 
   useEffect(() => {
+    if (!isActive) return;
     const el = contentRef.current;
-    if (!el || !sectionRef.current) return;
+    if (!el) return;
 
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        el.querySelectorAll('.card-stack-item'),
-        { y: 50, opacity: 0, scale: 0.9 },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 60%',
-            end: 'bottom 40%',
-            toggleActions: 'play reverse play reverse',
-          },
-        }
-      );
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, [sectionRef]);
+    gsap.fromTo(
+      el.querySelectorAll('.card-stack-item'),
+      { y: 40, opacity: 0, scale: 0.9 },
+      {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: 'power3.out',
+      }
+    );
+  }, [isActive]);
 
   return (
     <section
       ref={sectionRef}
       id="about"
-      className="relative w-full min-h-screen flex items-center justify-end px-5 sm:px-12 lg:px-24 py-16 sm:py-20 pointer-events-none select-none"
+      className="relative w-full h-full min-h-screen flex items-center justify-end px-5 sm:px-12 lg:px-24 py-16 sm:py-20 pointer-events-none select-none"
     >
       <div 
         ref={contentRef}

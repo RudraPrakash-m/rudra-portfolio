@@ -3,42 +3,33 @@ import gsap from 'gsap';
 import { ArrowDown, Mail, ArrowUpRight, Eye, EyeOff, Phone } from 'lucide-react';
 import { rudraData } from '../../data/videos';
 
-export const ContactSection = ({ sectionRef }) => {
+export const ContactSection = ({ sectionRef, isActive = true }) => {
   const contentRef = useRef(null);
   const [showPhone, setShowPhone] = useState(false);
 
   useEffect(() => {
+    if (!isActive) return;
     const el = contentRef.current;
-    if (!el || !sectionRef.current) return;
+    if (!el) return;
 
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        el.querySelectorAll('.contact-fade'),
-        { y: 30, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 60%',
-            end: 'bottom 40%',
-            toggleActions: 'play reverse play reverse',
-          },
-        }
-      );
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, [sectionRef]);
+    gsap.fromTo(
+      el.querySelectorAll('.contact-fade'),
+      { y: 30, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: 'power2.out',
+      }
+    );
+  }, [isActive]);
 
   return (
     <section
       ref={sectionRef}
       id="contact"
-      className="relative w-full min-h-screen flex items-center justify-end px-5 sm:px-12 lg:px-24 py-16 sm:py-20 pointer-events-none select-none"
+      className="relative w-full h-full min-h-screen flex items-center justify-end px-5 sm:px-12 lg:px-24 py-16 sm:py-20 pointer-events-none select-none"
     >
       <div 
         ref={contentRef}
