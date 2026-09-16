@@ -6,8 +6,8 @@ export const rudraData = {
   tagline: "I build. Ideas launch. Simple.",
   email: "rudraprakash6458@gmail.com",
   phone: "+91 7846807407",
-  location: "Paradeep, Odisha, India",
-  linkedin: "https://www.linkedin.com/in/rudra-prakash-mallick-71b23627b",
+  location: "Bhubaneswar, Odisha, India",
+  linkedin: "https://www.linkedin.com/in/rudra-prakash-mallick-71b23627b/",
   github: "https://github.com/RudraPrakash-m",
   resumeUrl: "/Rudra _Prakash.pdf",
   

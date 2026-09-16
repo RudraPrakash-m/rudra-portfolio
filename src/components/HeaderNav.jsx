@@ -5,11 +5,11 @@ export const HeaderNav = ({ isMuted, setIsMuted }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navLinks = [
-    { name: 'Home', href: '#home', num: '01' },
-    { name: 'Works', href: '#works', num: '02' },
-    { name: 'Timeline', href: '#timeline', num: '03' },
-    { name: 'Personal', href: '#about', num: '04' },
-    { name: 'Contact', href: '#contact', num: '05' },
+    { name: 'Home', href: '#home', num: '01', index: 0 },
+    { name: 'Works', href: '#works', num: '02', index: 1 },
+    { name: 'Journey', href: '#timeline', num: '03', index: 2 },
+    { name: 'Personal', href: '#about', num: '04', index: 3 },
+    { name: 'Contact', href: '#contact', num: '05', index: 4 },
   ];
 
   return (
