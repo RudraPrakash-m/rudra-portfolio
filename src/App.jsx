@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { BackgroundVideos } from './components/BackgroundVideos';
 import { HeaderNav } from './components/HeaderNav';
+import { DeveloperTerminal } from './components/DeveloperTerminal';
 import { SEO } from './components/SEO';
 import { HeroSection } from './components/sections/HeroSection';
 import { WorksSection } from './components/sections/WorksSection';
@@ -12,15 +13,21 @@ import './index.css';
 const App = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
+  const [isTerminalOpen, setIsTerminalOpen] = useState(false);
 
   const bgVideosRef = useRef(null);
   const isTransitioningRef = useRef(false);
   const activeIndexRef = useRef(0);
+  const isTerminalOpenRef = useRef(false);
 
-  // Sync ref with state
+  // Sync refs with state
   useEffect(() => {
     activeIndexRef.current = activeIndex;
   }, [activeIndex]);
+
+  useEffect(() => {
+    isTerminalOpenRef.current = isTerminalOpen;
+  }, [isTerminalOpen]);
 
   // Smooth Transition to Target Section
   const goToSection = useCallback((targetIndex) => {
@@ -38,7 +45,8 @@ const App = () => {
   useEffect(() => {
     // 1. Mouse Wheel with small threshold for automatic smooth section glide
     const handleWheel = (e) => {
-      if (isTransitioningRef.current) return;
+      // If terminal is open or currently transitioning, ignore background scroll
+      if (isTerminalOpenRef.current || isTransitioningRef.current) return;
 
       // Small scroll delta triggers next / previous section smoothly
       if (Math.abs(e.deltaY) > 8) {
@@ -55,6 +63,7 @@ const App = () => {
     let touchStartX = 0;
 
     const handleTouchStart = (e) => {
+      if (isTerminalOpenRef.current) return;
       if (e.touches && e.touches.length > 0) {
         touchStartY = e.touches[0].clientY;
         touchStartX = e.touches[0].clientX;
@@ -62,7 +71,7 @@ const App = () => {
     };
 
     const handleTouchEnd = (e) => {
-      if (isTransitioningRef.current) return;
+      if (isTerminalOpenRef.current || isTransitioningRef.current) return;
       if (e.changedTouches && e.changedTouches.length > 0) {
         const touchEndY = e.changedTouches[0].clientY;
         const touchEndX = e.changedTouches[0].clientX;
@@ -82,7 +91,7 @@ const App = () => {
 
     // 3. Keyboard Navigation
     const handleKeyDown = (e) => {
-      if (isTransitioningRef.current) return;
+      if (isTerminalOpenRef.current || isTransitioningRef.current) return;
 
       if (e.key === 'ArrowDown' || e.key === 'PageDown' || (e.key === ' ' && !e.shiftKey)) {
         if (activeIndexRef.current < 4) {
@@ -122,12 +131,19 @@ const App = () => {
         activeIndex={activeIndex} 
       />
 
-      {/* Minimalist Top Right Header with Smooth Section Links */}
+      {/* Minimalist Top Right Header with Terminal Trigger & Section Links */}
       <HeaderNav 
         isMuted={isMuted} 
         setIsMuted={setIsMuted}
         onNavigate={goToSection}
         activeIndex={activeIndex}
+        onOpenTerminal={() => setIsTerminalOpen(true)}
+      />
+
+      {/* Interactive Developer CLI Terminal (Ctrl+K) */}
+      <DeveloperTerminal 
+        isOpen={isTerminalOpen} 
+        setIsOpen={setIsTerminalOpen} 
       />
 
       {/* Floating Minimalist Section Indicators (Desktop Right) */}

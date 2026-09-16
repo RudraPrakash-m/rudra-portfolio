@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Volume2, VolumeX, Menu, X } from 'lucide-react';
+import { Volume2, VolumeX, Menu, X, Terminal } from 'lucide-react';
 
-export const HeaderNav = ({ isMuted, setIsMuted }) => {
+export const HeaderNav = ({ isMuted, setIsMuted, onNavigate, activeIndex = 0, onOpenTerminal }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navLinks = [
@@ -12,13 +12,34 @@ export const HeaderNav = ({ isMuted, setIsMuted }) => {
     { name: 'Contact', href: '#contact', num: '05', index: 4 },
   ];
 
+  const handleLinkClick = (e, index) => {
+    e.preventDefault();
+    setMenuOpen(false);
+    if (onNavigate) {
+      onNavigate(index);
+    }
+  };
+
   return (
     <>
       <header className="fixed top-0 left-0 w-full z-50 px-5 sm:px-10 lg:px-16 py-4 sm:py-6 flex items-center justify-between pointer-events-auto text-[#1c1c1c]">
         <div />
 
         {/* Right Menu & Sound controls */}
-        <div className="flex items-center gap-2.5 sm:gap-4 bg-white/40 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none p-1.5 sm:p-0 rounded-full">
+        <div className="flex items-center gap-2 sm:gap-3 bg-white/50 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none p-1.5 sm:p-0 rounded-full">
+          {/* Interactive Developer Terminal Button */}
+          <button
+            onClick={onOpenTerminal}
+            aria-label="Open Developer Terminal (Ctrl+K)"
+            className="p-2 rounded-full hover:bg-black/5 transition-colors flex items-center justify-center cursor-pointer text-[#1c1c1c] group relative"
+            title="Developer CLI Terminal (Ctrl+K)"
+          >
+            <Terminal className="w-5 h-5 text-neutral-700 group-hover:text-emerald-600 transition-colors" />
+            <span className="hidden md:inline-block ml-1 text-[11px] font-mono font-bold text-neutral-500 group-hover:text-emerald-600">
+              CLI
+            </span>
+          </button>
+
           {/* Sound Toggle */}
           <button
             onClick={() => setIsMuted(!isMuted)}
