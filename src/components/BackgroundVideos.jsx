@@ -2,8 +2,8 @@ import React, { forwardRef, useImperativeHandle, useRef, useEffect, useState } f
 
 export const BackgroundVideos = forwardRef(({ isMuted, activeIndex }, ref) => {
   const videoRefs = useRef([]);
-  // Track which videos have been requested to load
-  const [loadedIndices, setLoadedIndices] = useState([0]); // Only load Video 1 on initial render
+  // Preload video 1 (hero) and video 2 (first scroll) immediately for zero-latency presentation
+  const [loadedIndices, setLoadedIndices] = useState([0, 1]);
 
   const videos = [
     { id: 1, src: '/1_optimized.mp4' },
@@ -18,8 +18,7 @@ export const BackgroundVideos = forwardRef(({ isMuted, activeIndex }, ref) => {
     getAllVideos: () => videoRefs.current,
   }));
 
-  // Intelligent On-Demand Video Loading
-  // When user approaches section N, pre-warm section N-1, N, N+1
+  // Intelligent On-Demand Pre-warming
   useEffect(() => {
     setLoadedIndices((prev) => {
       const next = new Set(prev);
@@ -38,9 +37,7 @@ export const BackgroundVideos = forwardRef(({ isMuted, activeIndex }, ref) => {
         if (idx === activeIndex) {
           const playPromise = video.play();
           if (playPromise !== undefined) {
-            playPromise.catch(() => {
-              // Autoplay safety catch
-            });
+            playPromise.catch(() => {});
           }
         } else {
           video.pause();
@@ -71,7 +68,7 @@ export const BackgroundVideos = forwardRef(({ isMuted, activeIndex }, ref) => {
                 autoPlay={idx === activeIndex}
                 loop
                 muted={isMuted}
-                preload={idx === 0 ? "metadata" : "none"}
+                preload={idx <= 1 ? "auto" : "metadata"}
                 className="absolute inset-0 w-full h-full object-cover object-[15%_center] sm:object-left lg:object-center select-none transform-gpu will-change-transform"
               />
             )}
