@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { BackgroundVideos } from './components/BackgroundVideos';
 import { HeaderNav } from './components/HeaderNav';
 import { DeveloperTerminal } from './components/DeveloperTerminal';
+import { RudraAIAssistant } from './components/RudraAIAssistant';
 import { SEO } from './components/SEO';
 import { HeroSection } from './components/sections/HeroSection';
 import { WorksSection } from './components/sections/WorksSection';
@@ -106,7 +107,7 @@ const App = () => {
       }
     };
 
-    window.addEventListener('wheel', handleWheel, { passive: true });
+    window.addEventListener('wheel', handleWheel, { passive: false });
     window.addEventListener('touchstart', handleTouchStart, { passive: true });
     window.addEventListener('touchend', handleTouchEnd, { passive: true });
     window.addEventListener('keydown', handleKeyDown);
@@ -145,6 +146,9 @@ const App = () => {
         isOpen={isTerminalOpen} 
         setIsOpen={setIsTerminalOpen} 
       />
+
+      {/* Rudra AI Recruiter & Technical Assistant (Bottom-Right Floating Chat) */}
+      <RudraAIAssistant />
 
       {/* Floating Minimalist Section Indicators (Desktop Right) */}
       <div className="hidden lg:flex fixed right-6 top-1/2 -translate-y-1/2 z-40 flex-col items-center gap-3">

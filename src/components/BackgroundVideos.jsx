@@ -29,12 +29,13 @@ export const BackgroundVideos = forwardRef(({ isMuted, activeIndex }, ref) => {
     });
   }, [activeIndex, videos.length]);
 
-  // Handle active video playback & pause others
+  // Handle active video playback & pause others (plays once upon entering)
   useEffect(() => {
     videoRefs.current.forEach((video, idx) => {
       if (video) {
         video.muted = isMuted;
         if (idx === activeIndex) {
+          video.currentTime = 0;
           const playPromise = video.play();
           if (playPromise !== undefined) {
             playPromise.catch(() => {});
@@ -66,7 +67,6 @@ export const BackgroundVideos = forwardRef(({ isMuted, activeIndex }, ref) => {
                 src={video.src}
                 playsInline
                 autoPlay={idx === activeIndex}
-                loop
                 muted={isMuted}
                 preload={idx <= 1 ? "auto" : "metadata"}
                 className="absolute inset-0 w-full h-full object-cover object-[15%_center] sm:object-left lg:object-center select-none transform-gpu will-change-transform"
