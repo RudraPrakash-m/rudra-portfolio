@@ -9,6 +9,7 @@ export const rudraData = {
   location: "Paradeep, Odisha, India",
   linkedin: "https://www.linkedin.com/in/rudra-prakash-mallick-71b23627b",
   github: "https://github.com/RudraPrakash-m",
+  resumeUrl: "/Rudra _Prakash.pdf",
   
   projects: [
     {

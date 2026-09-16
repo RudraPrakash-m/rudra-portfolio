@@ -154,20 +154,23 @@ export const ContactSection = ({ sectionRef }) => {
           </a>
         </div>
 
-        {/* Download Resume Pill Button */}
+        {/* Download Resume / CV Pill Button */}
         <div className="contact-fade pt-2">
-          <button
-            onClick={() => alert(`Downloading ${rudraData.name}'s Resume...`)}
-            aria-label="Download Resume"
-            className="group flex items-center h-12 sm:h-14 pl-2 pr-5 sm:pr-6 rounded-full bg-white text-[#1c1c1c] border border-black/10 hover:border-black/30 shadow-xl transition-all hover:scale-105 active:scale-95 cursor-pointer"
+          <a
+            href={rudraData.resumeUrl || "/Rudra _Prakash.pdf"}
+            download="Rudra_Prakash_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Download Rudra Prakash's CV"
+            className="group flex items-center h-12 sm:h-14 pl-2 pr-5 sm:pr-6 rounded-full bg-white text-[#1c1c1c] border border-black/10 hover:border-black/30 shadow-xl transition-all hover:scale-105 active:scale-95 cursor-pointer no-underline"
           >
             <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black text-white flex items-center justify-center mr-2.5 sm:mr-3 shadow-md group-hover:translate-y-0.5 transition-transform shrink-0">
               <ArrowDown className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
             <span className="font-bold text-xs sm:text-sm md:text-base tracking-tight select-none">
-              Download Resume
+              Download CV
             </span>
-          </button>
+          </a>
         </div>
       </div>
     </section>

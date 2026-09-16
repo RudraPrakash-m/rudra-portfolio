@@ -122,19 +122,22 @@ export const StorySection = ({ section, index, total, sectionRef, isActive }) =>
         {section.id === 5 && (
           <div className="story-reveal pt-4 flex flex-wrap gap-4 justify-start lg:justify-end">
             <a
-              href="mailto:contact@rudra-portfolio.dev"
-              className="px-6 py-3.5 rounded-full bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-sm font-['Syne'] flex items-center gap-2 shadow-xl shadow-cyan-500/20 transition-all hover:scale-105 cursor-pointer"
+              href={`mailto:${rudraData.email}`}
+              className="px-6 py-3.5 rounded-full bg-black text-white font-bold text-sm font-['Syne'] flex items-center gap-2 shadow-xl transition-all hover:scale-105 cursor-pointer no-underline"
             >
               <Mail className="w-4 h-4" />
               <span>Get In Touch</span>
             </a>
-            <button
-              onClick={() => alert("Downloading Showreel & Portfolio Package...")}
-              className="px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/20 font-bold text-sm font-['Syne'] flex items-center gap-2 backdrop-blur-xl transition-all hover:scale-105 cursor-pointer"
+            <a
+              href="/Rudra _Prakash.pdf"
+              download="Rudra_Prakash_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3.5 rounded-full bg-white text-[#1c1c1c] border border-black/15 font-bold text-sm font-['Syne'] flex items-center gap-2 shadow-md transition-all hover:scale-105 cursor-pointer no-underline"
             >
               <Download className="w-4 h-4" />
-              <span>Download Master Showreel</span>
-            </button>
+              <span>Download CV</span>
+            </a>
           </div>
         )}
       </div>
